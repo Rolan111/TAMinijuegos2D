@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour
 {
     public GameObject correctForm;
     public GameObject winScreen;
+    public GameObject wrongCorrectImage;
 
     public AudioSource source;
     public AudioClip correctClip, wrongClip, victoryClip;
@@ -20,6 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
     private float minDistanceToAttachPlanet = 0.5f;
 
     private WinControllerScript WinController;
+
 
     private Vector3 resetPosition;
 
@@ -72,6 +75,8 @@ public class NewBehaviourScript : MonoBehaviour
             isFinished = true;
             WinController.AddPoints();
 
+            wrongCorrectImage.gameObject.transform.Find("Correct").gameObject.SetActive(true);
+            StartCoroutine(HideCorrectWrongIcon("Correct"));
 
             if (WinController.ValidateWin())
             {
@@ -88,6 +93,8 @@ public class NewBehaviourScript : MonoBehaviour
         else
         {
             this.transform.localPosition = new Vector3(resetPosition.x, resetPosition.y, resetPosition.z);
+            wrongCorrectImage.gameObject.transform.Find("Wrong").gameObject.SetActive(true);
+            StartCoroutine(HideCorrectWrongIcon("Wrong"));
             PlayWrongSound();
         }
     }
@@ -102,6 +109,12 @@ public class NewBehaviourScript : MonoBehaviour
     {
         source.clip = wrongClip;
         source.Play();
+    }
+
+    private IEnumerator HideCorrectWrongIcon(String name)
+    {
+        yield return new WaitForSeconds(1);
+        wrongCorrectImage.gameObject.transform.Find(name).gameObject.SetActive(false);
     }
 
     private void PlayVictorySound()
