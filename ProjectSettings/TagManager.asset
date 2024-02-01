@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: PlanetWhite
+    uniqueID: 4117973639
+    locked: 0
+  - name: Planet
+    uniqueID: 809918697
+    locked: 0
