@@ -48,13 +48,14 @@ public class NewBehaviourScript : MonoBehaviour
         {
             answersObjects[i].GetComponentInChildren<TMP_Text>().text = questionsList[counter].answers[i].answer;
             bool isCorrect = questionsList[counter].answers[i].isCorrect;
+            GameObject answer = answersObjects[i]; 
 
             EventTrigger eventTrigger = answersObjects[i].gameObject.AddComponent<EventTrigger>();
             EventTrigger.Entry clickEvent = new EventTrigger.Entry()
             {
                 eventID = EventTriggerType.PointerClick
             };
-            clickEvent.callback.AddListener((eventData) => ValidateAnswer(eventData, isCorrect));
+            clickEvent.callback.AddListener((eventData) => ValidateAnswer(eventData, isCorrect, answer));
 
             eventTrigger.triggers.Add(clickEvent);
 
@@ -62,26 +63,29 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
 
-    private void ValidateAnswer(BaseEventData eventData, bool isCorrect)
+    private void ValidateAnswer(BaseEventData eventData, bool isCorrect, GameObject gameObject)
     {
         if (isCorrect)
         {
+            gameObject.GetComponentInChildren<Image>().color = Color.green;
             correctScreen.SetActive(true);
         }
         else
         {
+            gameObject.GetComponentInChildren<Image>().color = Color.red;
             wrongScreen.SetActive(true);
         }
 
-        StartCoroutine(ShowCorrectIncorrectImage(isCorrect));
+        StartCoroutine(ShowCorrectIncorrectImage(isCorrect, gameObject));
 
     }
 
-    private IEnumerator ShowCorrectIncorrectImage(bool isCorrect)
+    private IEnumerator ShowCorrectIncorrectImage(bool isCorrect, GameObject gameObject)
     {
 
         PlaySound(isCorrect);
         yield return new WaitForSeconds(1);
+        gameObject.GetComponentInChildren <Image>().color = Color.white;
 
         if (isCorrect)
         {
