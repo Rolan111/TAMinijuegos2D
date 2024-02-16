@@ -13,6 +13,10 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject wrongCorrectImage;
     public bool isCorrect;
 
+    public Sprite spriteHover;
+
+    private Sprite spriteBase;
+
 
     public AudioSource source;
     public AudioClip correctClip, wrongClip, victoryClip, lostClip;
@@ -33,6 +37,7 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         resetPosition = this.transform.localPosition;
+        spriteBase = GetComponent<SpriteRenderer>().sprite;
     }
 
     void Update()
@@ -67,6 +72,20 @@ public class NewBehaviourScript : MonoBehaviour
                 isMoving = true;
             }
         }
+    }
+
+
+    private void OnMouseEnter()
+    {
+        if (!isFinished)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = spriteHover;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = spriteBase;
     }
 
     private void OnMouseUp()
@@ -127,7 +146,7 @@ public class NewBehaviourScript : MonoBehaviour
         wrongCorrectImage.gameObject.transform.Find(name).gameObject.SetActive(false);
         if (name == "Correct")
         {
-            
+
             bool win = LifeCounter.AddIngredient();
             if (win)
             {

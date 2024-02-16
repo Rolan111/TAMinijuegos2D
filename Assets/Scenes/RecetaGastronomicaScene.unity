@@ -175,6 +175,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 1
+  spriteHover: {fileID: 21300000, guid: b0cdb1a5fb849de4a971807abf3bdc38, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -763,6 +764,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 1
+  spriteHover: {fileID: 21300000, guid: bff732c346998134db892b243cfbd258, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -1508,6 +1510,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 1
+  spriteHover: {fileID: 21300000, guid: 6c64fba8402634b45b73541b150e119e, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -1894,6 +1897,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 0
+  spriteHover: {fileID: 21300000, guid: 7a7ab2a31ff5b93439b20ba784b6b92b, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -2670,6 +2674,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 1
+  spriteHover: {fileID: 21300000, guid: be66f5d53ead4e84598436a2c8684cf7, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -5024,6 +5029,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 1
+  spriteHover: {fileID: 21300000, guid: dec92bebf134c9b4e8e26164f0234911, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -5178,6 +5184,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 1
+  spriteHover: {fileID: 21300000, guid: 2278e8c8de6030f4db51ae5128587e5f, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -5597,6 +5604,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 0
+  spriteHover: {fileID: 21300000, guid: b0d6d0b99092b8b4d8a37eabad19fdcb, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -6051,6 +6059,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 0
+  spriteHover: {fileID: 21300000, guid: c44f41d217f56d244a718ffc269f491a, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
@@ -6575,6 +6584,7 @@ MonoBehaviour:
   lostScreen: {fileID: 513197732}
   wrongCorrectImage: {fileID: 1590567493}
   isCorrect: 1
+  spriteHover: {fileID: 21300000, guid: 0873f0d3ee7c5174e9bb42cc05401b33, type: 3}
   source: {fileID: 878024194}
   correctClip: {fileID: 8300000, guid: 357a978d4c1280b408511abe9ff57904, type: 3}
   wrongClip: {fileID: 8300000, guid: f23b076f85dbe66448f4dfe3e0c92420, type: 3}
