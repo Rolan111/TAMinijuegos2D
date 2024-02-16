@@ -13,11 +13,14 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject wrongCorrectImage;
     public bool isCorrect;
 
+
     public AudioSource source;
     public AudioClip correctClip, wrongClip, victoryClip, lostClip;
 
     private bool isMoving;
     private bool isFinished;
+
+
 
     private float startPosX;
     private float startPosY;
@@ -50,7 +53,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(LifeCounter.Lifes>0)
+        if (LifeCounter.Lifes > 0 && !isFinished)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -68,37 +71,41 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnMouseUp()
     {
-        isMoving = false;
-        float distanceIngredientX = Mathf.Abs(this.transform.position.x - bowl.transform.position.x);
-        float distanceIngredientY = Mathf.Abs(this.transform.position.y - bowl.transform.position.y);
-
-        if (distanceIngredientX <= minDistanceToAttachIngredient && distanceIngredientY <= minDistanceToAttachIngredient)
+        if (!isFinished)
         {
-            if(isCorrect)
+            isMoving = false;
+            float distanceIngredientX = Mathf.Abs(this.transform.position.x - bowl.transform.position.x);
+            float distanceIngredientY = Mathf.Abs(this.transform.position.y - bowl.transform.position.y);
+
+            if (distanceIngredientX <= minDistanceToAttachIngredient && distanceIngredientY <= minDistanceToAttachIngredient)
             {
-                this.gameObject.GetComponentInChildren<TMP_Text>().enabled = false;
-                wrongCorrectImage.gameObject.transform.Find("Correct").gameObject.SetActive(true);
-                StartCoroutine(HideCorrectWrongIcon("Correct"));
-                //this.gameObject.transform.localScale = Vector3.zero;
-                PlayCorrectSound();
+                if (isCorrect)
+                {
+                    isFinished = true;
+                    this.gameObject.GetComponentInChildren<TMP_Text>().enabled = false;
+                    wrongCorrectImage.gameObject.transform.Find("Correct").gameObject.SetActive(true);
+                    StartCoroutine(HideCorrectWrongIcon("Correct"));
+                    //this.gameObject.transform.localScale = Vector3.zero;
+                    PlayCorrectSound();
+                }
+                else
+                {
+                    this.transform.localPosition = new Vector3(resetPosition.x, resetPosition.y, resetPosition.z);
+                    wrongCorrectImage.gameObject.transform.Find("Wrong").gameObject.SetActive(true);
+                    StartCoroutine(HideCorrectWrongIcon("Wrong"));
+                    PlayWrongSound();
+                }
+
+
             }
+
             else
             {
                 this.transform.localPosition = new Vector3(resetPosition.x, resetPosition.y, resetPosition.z);
-                wrongCorrectImage.gameObject.transform.Find("Wrong").gameObject.SetActive(true);
-                StartCoroutine(HideCorrectWrongIcon("Wrong"));
-                PlayWrongSound();
+                //wrongCorrectImage.gameObject.transform.Find("Wrong").gameObject.SetActive(true);
+                //StartCoroutine(HideCorrectWrongIcon("Wrong"));
+                //PlayWrongSound();
             }
-
-
-        }
-
-        else
-        {
-            this.transform.localPosition = new Vector3(resetPosition.x, resetPosition.y, resetPosition.z);
-            //wrongCorrectImage.gameObject.transform.Find("Wrong").gameObject.SetActive(true);
-            //StartCoroutine(HideCorrectWrongIcon("Wrong"));
-            //PlayWrongSound();
         }
     }
 
@@ -120,6 +127,7 @@ public class NewBehaviourScript : MonoBehaviour
         wrongCorrectImage.gameObject.transform.Find(name).gameObject.SetActive(false);
         if (name == "Correct")
         {
+            
             bool win = LifeCounter.AddIngredient();
             if (win)
             {
@@ -134,9 +142,9 @@ public class NewBehaviourScript : MonoBehaviour
             {
                 lostScreen.SetActive(true);
                 PlayLostSound();
-                Debug.Log("LOST");
+
             }
-            
+
         }
     }
 
