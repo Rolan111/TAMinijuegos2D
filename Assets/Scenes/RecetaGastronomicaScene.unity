@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0d4df056b39fa44a172577062bfd75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: SistemaSolarScene
+  SceneName: RecetaGastronomicaScene
 --- !u!1 &464469325
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,16 +49,19 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(LifeCounter.Lifes>0)
         {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 mousePos;
+                mousePos = Input.mousePosition;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            startPosX = mousePos.x - this.transform.localPosition.x;
-            startPosY = mousePos.y - this.transform.localPosition.y;
+                startPosX = mousePos.x - this.transform.localPosition.x;
+                startPosY = mousePos.y - this.transform.localPosition.y;
 
-            isMoving = true;
+                isMoving = true;
+            }
         }
     }
 
@@ -125,7 +128,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         else
         {
-            int lifes = LifeCounter.LostLife();
+            int lifes = LifeCounter.instance.LostLife();
             if (lifes <= 0)
             {
                 lostScreen.SetActive(true);
