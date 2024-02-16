@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bowl
+  - Ingredient
   layers:
   - Default
   - TransparentFX
@@ -41,9 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: PlanetWhite
-    uniqueID: 4117973639
-    locked: 0
-  - name: Planet
-    uniqueID: 809918697
+  - name: Ingredient
+    uniqueID: 2261804297
     locked: 0

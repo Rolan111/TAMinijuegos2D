@@ -11,7 +11,7 @@ public class WinControllerScript : MonoBehaviour
 
     void Start()
     {
-        pointsToWin = planets.transform.childCount;
+        pointsToWin = 7;
     }
 
     // Update is called once per frame
