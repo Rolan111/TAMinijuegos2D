@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -10,10 +11,12 @@ using UnityEngine.UI;
 public class NewBehaviourScript : MonoBehaviour
 {
     public List<GameObject> answersObjects;
-    public TMP_Text questionText;
-    public GameObject correctScreen, wrongScreen, winScreen;
+    public TMP_Text questionText, lifesText;
+    public GameObject correctScreen, wrongScreen, winScreen, lostScreen, question, answers;
     public AudioSource source;
-    public AudioClip correctClip, wrongClip, victoryClip;
+    public AudioClip correctClip, wrongClip, victoryClip, lostClip;
+
+    private int lifesRemaining;
 
     Entities entities;
 
@@ -28,10 +31,12 @@ public class NewBehaviourScript : MonoBehaviour
         questionsList = entities.CreateQuestionList();
         LoadQuestion();
         LoadAnswers();
+        lifesRemaining = 3;
     }
 
     void Update()
     {
+        
     }
 
     private void LoadQuestion()
@@ -48,7 +53,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             answersObjects[i].GetComponentInChildren<TMP_Text>().text = questionsList[counter].answers[i].answer;
             bool isCorrect = questionsList[counter].answers[i].isCorrect;
-            GameObject answer = answersObjects[i]; 
+            GameObject answer = answersObjects[i];
 
             EventTrigger eventTrigger = answersObjects[i].gameObject.AddComponent<EventTrigger>();
             EventTrigger.Entry clickEvent = new EventTrigger.Entry()
@@ -85,7 +90,8 @@ public class NewBehaviourScript : MonoBehaviour
 
         PlaySound(isCorrect);
         yield return new WaitForSeconds(1);
-        gameObject.GetComponentInChildren <Image>().color = Color.white;
+        
+        gameObject.GetComponentInChildren<Image>().color = Color.white;
 
         if (isCorrect)
         {
@@ -94,14 +100,14 @@ public class NewBehaviourScript : MonoBehaviour
 
             if (counter == questionsList.Count)
             {
-                gameObject.transform.Find("Question").gameObject.SetActive(false);
-                gameObject.transform.Find("Answers").gameObject.SetActive(false);
+                question.SetActive(false);
+                answers.SetActive(false);
                 winScreen.gameObject.SetActive(true);
                 PlayVictorySound();
             }
             else
             {
-                
+
                 RemoveComponents();
                 LoadQuestion();
                 LoadAnswers();
@@ -111,9 +117,41 @@ public class NewBehaviourScript : MonoBehaviour
         }
         else
         {
-            wrongScreen.SetActive(false);
+            lifesRemaining--;
+            if (lifesRemaining == 1)
+            {
+                StartCoroutine(TwinkleText());
+            }
+            lifesText.text = "Vidas restantes: " + lifesRemaining.ToString();
+            
+            if(lifesRemaining>0)
+            {
+                wrongScreen.SetActive(false);
+            }
+            else
+            {
+                StopCoroutine(TwinkleText());
+                question.SetActive(false);
+                answers.SetActive(false);
+                wrongScreen.SetActive(false);
+                correctScreen.SetActive(false);
+                
+
+                lostScreen.SetActive(true);
+                PlayLostSound();
+            }
         }
 
+    }
+
+    private IEnumerator TwinkleText()
+    {
+       while (true) 
+        {
+            lifesText.enabled = !lifesText.enabled;
+            yield return new WaitForSeconds(0.3f);
+        }
+        
     }
 
 
@@ -144,6 +182,12 @@ public class NewBehaviourScript : MonoBehaviour
     private void PlayVictorySound()
     {
         source.clip = victoryClip;
+        source.Play();
+    }
+
+    private void PlayLostSound()
+    {
+        source.clip = lostClip;
         source.Play();
     }
 
