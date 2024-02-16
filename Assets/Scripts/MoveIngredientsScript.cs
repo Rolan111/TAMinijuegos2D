@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,9 +76,10 @@ public class NewBehaviourScript : MonoBehaviour
         {
             if(isCorrect)
             {
+                this.gameObject.GetComponentInChildren<TMP_Text>().enabled = false;
                 wrongCorrectImage.gameObject.transform.Find("Correct").gameObject.SetActive(true);
                 StartCoroutine(HideCorrectWrongIcon("Correct"));
-                this.gameObject.transform.localScale = Vector3.zero;
+                //this.gameObject.transform.localScale = Vector3.zero;
                 PlayCorrectSound();
             }
             else
@@ -124,7 +126,6 @@ public class NewBehaviourScript : MonoBehaviour
                 winScreen.SetActive(true);
                 PlayVictorySound();
             }
-            this.gameObject.SetActive(false);
         }
         else
         {
