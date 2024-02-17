@@ -30,55 +30,77 @@ public class ObjectMatchingGame : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (LifeCounter.instance.GetLifesRemaining() > 0)
         {
-
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            if (Input.GetMouseButtonDown(0))
             {
-                isDragging = true;
+
+                Vector3 mousePos;
+                mousePos = Input.mousePosition;
+                mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+                if (hit.collider != null && hit.collider.gameObject == gameObject)
+                {
+                    isDragging = true;
+                    Vector3 colliderCenterBottom = hit.collider.bounds.center;
+                    colliderCenterBottom.y -= hit.collider.bounds.extents.y;
+                    colliderCenterBottom.z = 0;
+                    lineRenderer.SetPosition(0, colliderCenterBottom);
+                }
+            }
+            if (isDragging)
+            {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePosition.z = 0f;
-                lineRenderer.SetPosition(0, mousePosition);
-            }
-        }
-        if (isDragging)
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;
-            lineRenderer.SetPosition(1, mousePosition);
-            endPoint = mousePosition;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-            RaycastHit2D hit = Physics2D.Raycast(endPoint, Vector2.zero);
-            if (hit.collider != null && hit.collider.TryGetComponent(out objectMatchForm) && matchId == objectMatchForm.Get_ID())
-            {
-                LifeCounter.instance.Match();
-                this.enabled = false;
-                if (LifeCounter.instance.CheckWin())
-                {
-                    Win();
-                }
-                else
-                {
-                    Match();
-                }
-            }
-            else if (hit.collider != null && hit.collider.TryGetComponent(out objectMatchForm) && matchId != objectMatchForm.Get_ID())
-            {
-                lineRenderer.positionCount = 0;
-                NotMatch();
+                lineRenderer.SetPosition(1, mousePosition);
+                endPoint = mousePosition;
             }
 
-            lineRenderer.positionCount = 2;
+            if (Input.GetMouseButtonUp(0))
+            {
+                isDragging = false;
+
+                RaycastHit2D hit = Physics2D.Raycast(endPoint, Vector2.zero);
+                if (hit.collider != null && hit.collider.TryGetComponent(out objectMatchForm) && matchId == objectMatchForm.Get_ID())
+                {
+
+                    BoxCollider2D infoCardCollider = objectMatchForm.GetBoxCollider2D();
+
+                    Vector2 topLeftWorld = infoCardCollider.transform.TransformPoint(infoCardCollider.bounds.min);
+                    Vector2 topRightWorld = infoCardCollider.transform.TransformPoint(new Vector2(infoCardCollider.bounds.max.x, infoCardCollider.bounds.min.y));
+
+                    Vector2 topCenter = (topLeftWorld + topRightWorld) / 2f;
+                    topCenter.y += infoCardCollider.bounds.extents.y;
+
+                    lineRenderer.SetPosition(1, topCenter);
+
+                    hit = Physics2D.Raycast(topCenter, Vector2.zero);
+
+                    LifeCounter.instance.Match();
+                    this.enabled = false;
+
+                    if (LifeCounter.instance.CheckWin())
+                    {
+                        Win();
+                    }
+                    else
+                    {
+                        Match();
+                    }
+
+
+
+                }
+                else if (hit.collider != null && hit.collider.TryGetComponent(out objectMatchForm) && matchId != objectMatchForm.Get_ID())
+                {
+                    lineRenderer.positionCount = 0;
+                    NotMatch();
+                }
+
+                lineRenderer.positionCount = 2;
+            }
         }
     }
 

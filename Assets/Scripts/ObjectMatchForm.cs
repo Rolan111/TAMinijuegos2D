@@ -7,9 +7,16 @@ using UnityEngine;
 public class ObjectMatchForm : MonoBehaviour
 {
     [SerializeField] private int matchId;
+    [SerializeField] private BoxCollider2D boxCollider;
 
-    public int Get_ID()
+    private void Start()
     {
-        return matchId;
+        boxCollider = GetComponent<BoxCollider2D>();
     }
+
+    public int Get_ID() => matchId;
+
+
+    public BoxCollider2D GetBoxCollider2D() => boxCollider;
+
 }

@@ -46,11 +46,12 @@ public class LifeCounter : MonoBehaviour
 
     public void Match()
     {
-        CardsCounter++;
+        CardsCounter += 1;
     }
 
     public bool CheckWin()
     {
+        Debug.Log(CardsCounter);
         return CardsCounter >= CardsMax;
     }
 
