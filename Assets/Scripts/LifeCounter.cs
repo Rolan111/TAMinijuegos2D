@@ -8,43 +8,50 @@ public class LifeCounter : MonoBehaviour
     public TMP_Text lifesText;
 
     static public int Lifes;
-    
-    static private int IngredientCounter;
-    static private int IngredientsMax;
+
+    static private int CardsCounter;
+    static private int CardsMax;
 
     static public LifeCounter instance;
     void Start()
     {
         Lifes = 3;
-        IngredientsMax = 7;
-        IngredientCounter = 0;
+        CardsMax = 6;
+        CardsCounter = 0;
 
         instance = this;
     }
 
     private void Update()
     {
-        lifesText.text="Vidas restantes: "+Lifes.ToString();
+        lifesText.text = "Vidas restantes: " + Lifes.ToString();
 
     }
 
-    public int LostLife()
+    public void LostLife()
     {
-        
+
         Lifes--;
         if (Lifes == 1)
         {
             StartCoroutine(TwinkleText());
         }
 
+    }
+
+    public int GetLifesRemaining()
+    {
         return Lifes;
     }
 
-    static public bool AddIngredient()
+    public void Match()
     {
-        IngredientCounter++;
+        CardsCounter++;
+    }
 
-        return IngredientCounter >= IngredientsMax;
+    public bool CheckWin()
+    {
+        return CardsCounter >= CardsMax;
     }
 
     private IEnumerator TwinkleText()
@@ -56,7 +63,7 @@ public class LifeCounter : MonoBehaviour
         }
 
     }
-    
+
     public void StartBlinkText()
     {
         StartCoroutine(TwinkleText());
