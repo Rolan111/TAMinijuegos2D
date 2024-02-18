@@ -95,6 +95,7 @@ public class ObjectMatchingGame : MonoBehaviour
                 }
                 else if (hit.collider != null && hit.collider.TryGetComponent(out objectMatchForm) && matchId != objectMatchForm.Get_ID())
                 {
+                    endPoint = Vector2.zero;
                     lineRenderer.positionCount = 0;
                     NotMatch();
                 }
